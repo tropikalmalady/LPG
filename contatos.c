@@ -10,18 +10,18 @@ int main()
         int code;
         char nome[100];
         char email[200];
-        int celular;
+        char celular[20];
     };
     struct contato c[MAX];
-    int a=1,opcao,i=0,j,k,w,x;
+    int a=1,opcao,i=0,j,k;
     int aux;
     while (a<10) {
-     printf ("\n\nDigite 1 - adcionar novo contato.\nDigite 2 - excluir contato existente.");
+     printf ("\n\nDigite 1 - adicionar novo contato.\nDigite 2 - excluir contato existente.");
      printf ("\nDigite 3 - alterar contato existente.\nDigite 4 - listar todos os contatos.\nDigite 5 - sair.\n");
      scanf ("%d", &opcao);
      switch (opcao) {
          case 1:
-            printf ("\nCodigo de indentificacao: ");
+            printf ("\nCodigo de identificacao: ");
             scanf ("%d", &c[i].code);
             fflush(stdin);
             printf ("\nNome: ");
@@ -31,7 +31,8 @@ int main()
             scanf ("%s", c[i].email);
             fflush(stdin);
             printf ("\nCelular: ");
-            scanf ("%d", &c[i].celular);
+            scanf ("%s", &c[i].celular);
+            fflush(stdin);
             printf ("\n\nContato adicionado!");
             i++;
             break;
@@ -41,42 +42,43 @@ int main()
             for (j=0; j<i; j++) {
                 if (aux==c[j].code) {
                     printf ("\nContato com codigo %d excluido.", aux);
-                    for (k=j; k<i-1; k++) {
+                    for (k=j; k<i; k++) {
                        c[k].code = c[k+1].code;
                        strcpy (c[k].nome, c[k+1].nome);
                        strcpy (c[k].email, c[k+1].email);
-                       c[k].celular = c[k+1].celular;
-                       i--;
-                    }    
+                       strcpy (c[k].celular, c[k+1].celular);
+                    }
+                    i--;    
                 }
             }
             break;
          case 3:
             printf ("\nDigite o codgio de identificacao do contato que deseja alterar: ");
             scanf ("%d", &aux); 
-            for (w=0; w<i; w++) {
-                if (aux==c[w].code) {
+            for (j=0; j<i; j++) {
+                if (aux==c[j].code) {
                     printf ("\nDigite as novas informacoes de contato: ");
-                    printf ("\nCodigo de indentificacao: ");
-                    scanf ("%d", &c[w].code);
+                    printf ("\nCodigo de identificacao: ");
+                    scanf ("%d", &c[j].code);
                     fflush(stdin);
                     printf ("\nNome: ");
-                    scanf ("%s", c[w].nome);
+                    scanf ("%s", c[j].nome);
                     fflush(stdin);
                     printf ("\nE-mail: ");
-                    scanf ("%s", c[w].email);
+                    scanf ("%s", c[j].email);
                     fflush(stdin);
                     printf ("\nCelular: ");
-                    scanf ("%d", &c[w].celular);
+                    scanf ("%s", &c[j].celular);
+                    fflush (stdin);
                 }
             }
             break;
          case 4:
-            for (x=0; x<i; x++) {
-                printf ("\n\nCodigo de identificacao: %d", c[x].code);
-                printf ("\nNome: %s", c[x].nome);
-                printf ("\nE-mail: %s", c[x].email);
-                printf ("\nCelular: %d", c[x].celular);
+            for (j=0; j<i; j++) {
+                printf ("\n\nCodigo de identificacao: %d", c[j].code);
+                printf ("\nNome: %s", c[j].nome);
+                printf ("\nE-mail: %s", c[j].email);
+                printf ("\nCelular: %s", c[j].celular);
             }
             break;
          case 5:
@@ -84,7 +86,7 @@ int main()
             system ("pause");
             return 0;
          default:
-            printf ("Opcao invalida. Digite novamenete.");
+            printf ("Opcao invalida. Digite novamente.");
             break;
         }
     } 
